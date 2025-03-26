@@ -5,19 +5,19 @@
 
 class	Fixed
 {
-private:
-	int	_fixedPoint;
-	const int	_fractionalBits = 8;
-public:
-	Fixed();
-	Fixed( const int val );
-	Fixed( const float val );
+	private:
+		int	_fixedPoint;
+		static const int	_fractionalBits = 8;
+
+	public:
+		Fixed();
+		Fixed( const int val );
+		Fixed( const float val );
+		Fixed( const Fixed &prev );
+		void	operator=( const Fixed &prev );
+		float	toFloat( void ) const;
+		int	toInt( void ) const;
+		~Fixed();
 };
-
-Fixed::Fixed() {}
-
-Fixed::Fixed( const int val ) : _fractionalBits( val * 256 ) {}
-
-Fixed::Fixed( const float val ) : _fractionalBits( val * 256 ) {}
 
 #endif

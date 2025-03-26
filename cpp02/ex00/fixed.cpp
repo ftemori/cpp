@@ -17,7 +17,7 @@ void	Fixed::operator=( Fixed &prev )
 	this->_fixedPoint = prev.getRawBits();
 }
 
-int	Fixed::getRawBits( void )
+int	Fixed::getRawBits( void ) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
 	return (_fixedPoint);

@@ -24,7 +24,8 @@ void	greenColor(std::string str) {
 
 int	main(void)
 {
-	std::string	input, nameA, nameB, typeA, typeB, temp;
+	Weapon	weaponA, weaponB;
+	std::string	input, nameA, nameB, type, temp;
 	greenColor(" Please enter a name and weapon type for human A! ");
 	yellowColor("<name> <weapon>\n ");
 
@@ -32,13 +33,13 @@ int	main(void)
 	{
 		input.clear();
 		nameA.clear();
-		typeA.clear();
+		type.clear();
 		std::getline(std::cin, input);
 		std::stringstream	ss(input);
 		ss.clear();
 		ss >> nameA;
-		ss >> typeA;
-		if (nameA.empty() || typeA.empty())
+		ss >> type;
+		if (nameA.empty() || type.empty())
 		{
 			redColor( " Human A must have a weapon!\n");
 			greenColor(" Please enter a name and weapon type for human A! ");
@@ -48,7 +49,8 @@ int	main(void)
 		else
 			break ;
 	}
-	HumanA hA(typeA);
+	weaponA.setType(type);
+	HumanA hA(weaponA);
 	hA.setName(nameA);
 
 	greenColor(" Please enter a name and weapon type for human B! ");
@@ -57,19 +59,22 @@ int	main(void)
 	{
 		input.clear();
 		nameB.clear();
-		typeB.clear();
+		type.clear();
 		std::getline(std::cin, input);
 		std::stringstream ss(input);
 		ss.clear();
 		ss >> nameB;
-		ss >> typeB;
+		ss >> type;
 		if (nameB.empty())
 			redColor( " Human B must at least have an identity!\n ");
 		else
 			break ;
 	}
-	HumanB hB = typeB.empty() ? HumanB() : HumanB(typeB);
-	hB.setName(nameB);
+	if (type.empty())
+		weaponB.setType("none");
+	else
+		weaponB.setType(type);
+	HumanB hB(nameB, weaponB);
 	hA.attack();
 	hB.attack();
 	return 0;

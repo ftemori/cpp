@@ -28,36 +28,26 @@ void	Harl::_error(void)
 
 void	Harl::filter(std::string &level)
 {
+	int	flag = 0;
 	typedef void(Harl::*Funcs_t)(void);
 	Funcs_t coments[] = { &Harl::_debug, &Harl::_info, &Harl::_warning, &Harl::_error };
 	std::string	levels[] = { "DEBUG", "INFO", "WARNING", "ERROR" };
 	for (int i = 0; i < 4; i++)
 	{
 		if (level == levels[i])
+			flag = 1;
+		if (flag)
 		{
 			yellowColor("[ ");
 			yellowColor(levels[i]);
 			yellowColor(" ]\n");
 			(this->*coments[i])();
 			std::cout << std::endl << std::endl;
-			break ;
 		}
 		else if (i == sizeof(levels) / sizeof(levels[0]) - 1)
 		{
 			yellowColor("[ Probably complaining about insignificant problems ]\n");
 			return ;
-		}
-	}
-
-	for (int i = 0; i < 4; i++)
-	{
-		if (level != levels[i])
-		{
-			yellowColor("[ ");
-			yellowColor(levels[i]);
-			yellowColor(" ]\n");
-			(this->*coments[i])();
-			std::cout << std::endl << std::endl;
 		}
 	}
 }
